@@ -1,18 +1,9 @@
-import BotaoPadrao from "../../Components/BotaoPadrao";
+import { Container } from "./Styles";
 
-import { useNavigate } from "react-router-dom";
-
-function Home(){
-
-    const navigate = useNavigate();
+export default function Home() {
     return(
-        <div>
-            Pagina HOME <BotaoPadrao onClick={() => navigate("/login")}>
-        
-            </BotaoPadrao>
-        </div>
-    )
-
+        <Container>
+            <h1>HOME</h1>
+        </Container>
+    );
 }
-
-export default Home;
