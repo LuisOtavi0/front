@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.header`
-    background-color: #ffd100;
+    background-color: #fec937;
     width: 100%;
     height: 100px;
     display: flex;
@@ -11,13 +11,14 @@ export const Container = styled.header`
 
     @media (max-width: 280px) {
     justify-content: center;
-    height: 60px;
+    height: 100px;
     padding: 0 10px;
     }
 `;
 
 export const Logo = styled.img`
-    height: 100px;
+    width: 250px;
+    height: auto;
 
     @media (max-width: 280px) {
         height: 100px;
