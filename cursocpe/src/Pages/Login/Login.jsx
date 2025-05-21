@@ -1,17 +1,36 @@
-import { Container, Formulario, Titulo, Input, InputWrapper, IconeOlho, Button, TextoFinal } from "./Styles";
+import { Container, Formulario, Titulo, Input, InputWrapper, IconeOlho, Button, TextoFinal, SpinnerAmarelo } from "./Styles";
 import { useState } from "react";
-import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
+import { EyeOutlined, EyeInvisibleOutlined, CodeSandboxCircleFilled } from "@ant-design/icons";
+import api from "../../services/api/api";
 
-export default function Cadastro(){
+export default function Login(){
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const [carregando, setCarregando] = useState(false)
 
     const [MostrarSenha, setMostrarSenha] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(email, senha);
+
+        try {
+            setCarregando(true);
+            const res = await api.post("/login", {email, senha});
+        } catch (erro) {
+            console.error(erro);
+            alert(erro.message);
+        } finally {
+            setCarregando(false);
+        }
     };
+
+    if (carregando) return (
+        <Container style={{display: 'flex', justifyContent: 'center',
+        alignItems: 'center', height: '100vh'}}>
+            <SpinnerAmarelo size="large" />
+        </Container>
+    );
+
     return(
         <Container>
             <Formulario onSubmit={handleSubmit}>

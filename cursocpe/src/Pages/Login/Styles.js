@@ -1,4 +1,11 @@
 import styled from "styled-components";
+import { Spin } from "antd";
+
+export const SpinnerAmarelo = styled(Spin)`
+  .ant-spin-dot-item {
+    background-color: yellow !important;
+  }
+`;
 
 export const Container = styled.div`
     background-color: #000;
