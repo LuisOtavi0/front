@@ -2,13 +2,19 @@ import { Container, Formulario, Titulo, Input, InputWrapper, IconeOlho, Button, 
 import { useState } from "react";
 import { EyeOutlined, EyeInvisibleOutlined, CodeSandboxCircleFilled } from "@ant-design/icons";
 import api from "../../services/api/api";
+import useAuthStore from "../../stores/auth";
 
 export default function Login(){
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
-    const [carregando, setCarregando] = useState(false)
+    const [carregando, setCarregando] = useState(false);
 
+    const token = useAuthStore((state) => state.token);
+    const usuario = useAuthStore((state) => state.usuario);
+    const setToken = useAuthStore((state) => state.setToken);
+    
     const [MostrarSenha, setMostrarSenha] = useState(false);
+    console.log({token, usuario});
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,6 +22,9 @@ export default function Login(){
         try {
             setCarregando(true);
             const res = await api.post("/login", {email, senha});
+            const {token} = res.data;
+
+            setToken(token);
         } catch (erro) {
             console.error(erro);
             alert(erro.message);
