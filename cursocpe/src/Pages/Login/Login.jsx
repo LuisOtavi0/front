@@ -3,6 +3,7 @@ import { useState } from "react";
 import { EyeOutlined, EyeInvisibleOutlined, CodeSandboxCircleFilled } from "@ant-design/icons";
 import api from "../../services/api/api";
 import useAuthStore from "../../stores/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function Login(){
     const [email, setEmail] = useState("");
@@ -12,9 +13,8 @@ export default function Login(){
     const token = useAuthStore((state) => state.token);
     const usuario = useAuthStore((state) => state.usuario);
     const setToken = useAuthStore((state) => state.setToken);
-    
+    const navigate = useNavigate()
     const [MostrarSenha, setMostrarSenha] = useState(false);
-    console.log({token, usuario});
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,9 +25,10 @@ export default function Login(){
             const {token} = res.data;
 
             setToken(token);
+            navigate("/");
         } catch (erro) {
             console.error(erro);
-            alert(erro.message);
+            alert(erro.response.data.message);
         } finally {
             setCarregando(false);
         }

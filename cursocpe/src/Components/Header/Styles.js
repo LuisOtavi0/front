@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.header`
     background-color: #fec937;
@@ -6,21 +7,19 @@ export const Container = styled.header`
     height: 100px;
     display: flex;
     align-items: center;
-    padding: 0 20px;
+    justify-content: space-between;
+    padding: 0 40px;
     box-sizing: border-box;
 
-    @media (max-width: 280px) {
-    justify-content: center;
-    height: 100px;
-    padding: 0 10px;
+    @media (max-width: 768px) {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
     }
 `;
 
 export const Logo = styled.img`
-    width: 250px;
+    width: 150px;
     height: auto;
-
-    @media (max-width: 280px) {
-        height: 100px;
-    }
 `;
+

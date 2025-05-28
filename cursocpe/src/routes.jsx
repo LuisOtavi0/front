@@ -2,17 +2,31 @@ import {
     RouterProvider,
     createBrowserRouter,
     Route,
-    createRoutesFromElements
+    createRoutesFromElements,
+    Navigate,
+    Outlet
 } from "react-router-dom";
 
-import { Login, Cadastro, Home} from "./Pages";
+import { Login, Cadastro, Home, Perfil} from "./Pages";
 import { AppLayout } from "./layouts";
+import useAuthStore from "./stores/auth";
+
+function RotasPrivadas() {
+    const token = useAuthStore((state) => state.token);
+
+    if (token) return <Outlet />;
+
+    return <Navigate to="/login" replace />
+}
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route>
             <Route path="/" element={<AppLayout />}>
-                <Route index element={<Home/>}/>
+                <Route element={<RotasPrivadas />}>
+                    <Route path="perfil" element={<Perfil/>}/>
+                    <Route index element={<Home/>}/>
+                </Route>
                 <Route path="login" element={<Login/>}/>
                 <Route path="Cadastro" element={<Cadastro/>}/>
             </Route>
