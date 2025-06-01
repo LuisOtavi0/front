@@ -1,12 +1,20 @@
 import { Container, SpinnerAmarelo} from "./Styles";
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import imagem1 from "../../assets/img1.png";
+import imagem2 from "../../assets/img2.png";
+import imagem3 from "../../assets/img3.png";
+import imagem4 from "../../assets/img4.png";
+
+
 import {useForm} from "react-hook-form";
 import { useCreateUser } from "../../hooks/user";
 import { useEffect, useState } from "react";
 import api from "../../services/api/api";
 import {Usuario} from "../../Components";
 
-    //Hooks
-export default function Home(){
+
+export default function Home() {
     const [usuarios, setUsuarios] = useState([]);
     const [carregando, setCarregando] = useState(false);
 
@@ -44,9 +52,31 @@ export default function Home(){
         postUser(data);
     };
 
-    return(
+    return (
         <Container>
-            {usuarios.map((usuario) => (<Usuario usuario={usuario} />))}
+            {/* Carrossel de imagens */}
+            <div style={{ width: "80%", maxWidth: "600px", marginBottom: "30px" }}>
+                <Carousel
+                    showThumbs={false}
+                    showStatus={false}
+                    infiniteLoop
+                    autoPlay
+                    interval={3000}
+                >
+                    <div>
+                        <img src={imagem1} alt="Imagem 1" />
+                    </div>
+                    <div>
+                        <img src={imagem2} alt="Imagem 2" />
+                    </div>
+                    <div>
+                        <img src={imagem3} alt="Imagem 3" />
+                    </div>
+                    <div>
+                        <img src={imagem4} alt="Imagem 4" />
+                    </div>
+                </Carousel>
+            </div>
         </Container>
     );
 }

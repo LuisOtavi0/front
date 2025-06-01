@@ -3,12 +3,13 @@ import { useState } from "react";
 import { EyeOutlined, EyeInvisibleOutlined, CodeSandboxCircleFilled } from "@ant-design/icons";
 import api from "../../services/api/api";
 import useAuthStore from "../../stores/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Login(){
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [carregando, setCarregando] = useState(false);
+    const [mensagemErro, setMensagemErro] = useState("");
 
     const token = useAuthStore((state) => state.token);
     const usuario = useAuthStore((state) => state.usuario);
@@ -21,6 +22,8 @@ export default function Login(){
 
         try {
             setCarregando(true);
+            setMensagemErro("");
+
             const res = await api.post("/login", {email, senha});
             const {token} = res.data;
 
@@ -28,7 +31,7 @@ export default function Login(){
             navigate("/");
         } catch (erro) {
             console.error(erro);
-            alert(erro.response.data.message);
+            setMensagemErro("Usuário ou senha inválidos");
         } finally {
             setCarregando(false);
         }
@@ -56,8 +59,14 @@ export default function Login(){
                 </IconeOlho>
                 </InputWrapper>
 
+                {mensagemErro && (
+                    <p style={{ color: "red", marginTop: "8px", marginBottom: "0" }}>
+                        {mensagemErro}
+                    </p>
+                )}
+
                 <TextoFinal>
-                    Não tem login? Faça seu cadastro <a href='#'>aqui</a>.
+                    Não tem login? Faça seu cadastro <Link to="/cadastro">aqui</Link>.
                 </TextoFinal>
 
 

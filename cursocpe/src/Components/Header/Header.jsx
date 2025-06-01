@@ -20,7 +20,7 @@ export default function Header() {
                         <>
                             <Link to="/">Home</Link>
                             <Link to="/perfil">Perfil</Link>
-                            <h2>Seja bem-vindo {usuario.nome}</h2>
+                            <h2 style={{ color: 'black' }}>Seja bem-vindo {usuario.nome}</h2>
                             <button type="button" onClick={clearAuth}>Deslogar</button>
                         </>
                     )}

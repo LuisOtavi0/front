@@ -1,5 +1,5 @@
 import {useQuery, useMutation } from "@tanstack/react-query";
-import {GetUsers, CreateUser, UpdateUser, DeleteUser } from "../services/api/endpoints";
+import {GetUsers, CreateUser, UpdateUser, DeleteUser, LoginUser } from "../services/api/endpoints";
 
 export function useGetUsers({onSuccess = () => {}, onError = () => {},
 } = {}) {
@@ -21,3 +21,10 @@ export function useDeleteUser({onSuccess = () => {}, onError = () => {},
     return useMutation({mutationFn: DeleteUser, onSuccess, onError});
 }
 
+export function useLogin({ onSuccess = () => {}, onError = () => {} } = {}) {
+  return useMutation({
+    mutationFn: LoginUser,
+    onSuccess,
+    onError,
+  });
+}
