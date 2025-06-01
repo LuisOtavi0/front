@@ -5,6 +5,7 @@ import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import { useCreateUser, useGetUsers, useLogin } from "../../hooks/user";
 import { useNavigate, Link } from "react-router-dom";
 import useAuthStore from "../../stores/auth";
+import { CreateUser } from "../../services/api/endpoints";
 
 export default function Cadastro(){
     const {handleSubmit, register, watch, formState: {errors},} = useForm({});
@@ -38,7 +39,7 @@ export default function Cadastro(){
             status: "ativo" // valor padrão
         };
 
-        postUser(dadosComStatus, {
+        CreateUser(dadosComStatus, {
             onSuccess: async () => {
                 try {
                     await loginUser({

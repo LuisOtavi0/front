@@ -1,5 +1,6 @@
-import { Container, SpinnerAmarelo} from "./Styles";
+import { Container, SpinnerAmarelo, CarrosselWrapper} from "./Styles";
 import { Carousel } from 'react-responsive-carousel';
+import TabelaSessoes from "../../Components/Tabela/TabelaSessoes";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import imagem1 from "../../assets/img1.png";
 import imagem2 from "../../assets/img2.png";
@@ -54,8 +55,7 @@ export default function Home() {
 
     return (
         <Container>
-            {/* Carrossel de imagens */}
-            <div style={{ width: "80%", maxWidth: "600px", marginBottom: "30px" }}>
+            <CarrosselWrapper>
                 <Carousel
                     showThumbs={false}
                     showStatus={false}
@@ -76,7 +76,8 @@ export default function Home() {
                         <img src={imagem4} alt="Imagem 4" />
                     </div>
                 </Carousel>
-            </div>
+            </CarrosselWrapper>
+            <TabelaSessoes />
         </Container>
     );
 }
