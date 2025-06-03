@@ -30,13 +30,11 @@ export default function Cadastro(){
 
 
     function response(data){
-        // Remove o campo confirmarSenha antes de enviar
         const { confirmarSenha, ...dadosValidos } = data;
 
-        // Acrescenta status fixo
         const dadosComStatus = {
             ...dadosValidos,
-            status: "ativo" // valor padrão
+            status: "ativo"
         };
 
         CreateUser(dadosComStatus, {
@@ -46,13 +44,13 @@ export default function Cadastro(){
                         email: dadosComStatus.email,
                         senha: dadosComStatus.senha,
                     });
-                    navigate("/");
                 } catch (err) {
                     console.error("Erro no login automático:", err);
                 }
             },
             onError: (err) => {
                 console.error("Erro ao cadastrar:", err.response?.data || err.message || err);
+                alert("Erro ao cadastrar: " + (err.response?.data?.mensagem || err.message));
             },
             });
     }

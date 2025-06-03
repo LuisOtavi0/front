@@ -1,31 +1,36 @@
-import { Link } from "react-router-dom";
-import { Container, Logo } from "./Styles";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Container, Logo, NavArea } from "./Styles";
 import LogoImg from "../../assets/Logo.png";
 import useAuthStore from "../../stores/auth";
 
 export default function Header() {
     const usuario = useAuthStore((state) => state.usuario);
     const clearAuth = useAuthStore((state) => state.clearAuth);
-   
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const path = location.pathname;
+    const isAuthPage = path === "/login" || path === "/cadastro";
+    const LogoClick = () => {
+        if (!isAuthPage) {
+            navigate("/");
+        }
+    };
 
     return (
         <Container>
-            <Logo src={LogoImg} alt="Logo CPE" />
+            <Logo src={LogoImg} alt="Logo CPE" onClick={LogoClick} 
+            style={{ cursor: isAuthPage ? "default" : "pointer" }} />
 
-                <>
-                    <Link to="/login">Login</Link>
-                    <Link to="/cadastro">Cadastro</Link>
-
-                    {!!usuario && (
-                        <>
-                            <Link to="/">Home</Link>
-                            <Link to="/perfil">Perfil</Link>
-                            <h2 style={{ color: 'black' }}>Seja bem-vindo {usuario.nome}</h2>
-                            <button type="button" onClick={clearAuth}>Deslogar</button>
-                        </>
-                    )}
-                </>
-           
+            {!isAuthPage && usuario && (
+                <NavArea>
+                    <Link to="/">Home</Link>
+                    <Link to="/perfil">Perfil</Link>
+                    <Link to="/usuarios">Usuários</Link>
+                    <span style={{ color: "black" }}>Seja bem-vindo, {usuario.nome}</span>
+                    <button onClick={clearAuth}>Deslogar</button>
+                </NavArea>
+            )}
         </Container>
     );
 }

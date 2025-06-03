@@ -1,11 +1,5 @@
-import {
-    RouterProvider,
-    createBrowserRouter,
-    Route,
-    createRoutesFromElements,
-    Navigate,
-    Outlet
-} from "react-router-dom";
+import {RouterProvider, createBrowserRouter, Route, createRoutesFromElements,
+    Navigate, Outlet} from "react-router-dom";
 
 import { Login, Cadastro, Home, Perfil} from "./Pages";
 import { AppLayout } from "./layouts";
@@ -24,8 +18,9 @@ const router = createBrowserRouter(
         <Route>
             <Route path="/" element={<AppLayout />}>
                 <Route element={<RotasPrivadas />}>
+                    <Route index element={<Home />} />
                     <Route path="perfil" element={<Perfil/>}/>
-                    <Route index element={<Home/>}/>
+                    
                 </Route>
                 <Route path="login" element={<Login/>}/>
                 <Route path="Cadastro" element={<Cadastro/>}/>
