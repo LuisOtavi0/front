@@ -12,6 +12,8 @@ export default function Cadastro(){
     const senha = watch("senha");
     const navigate = useNavigate();
 
+    const [erroCadastro, setErroCadastro] = useState("");
+
     const setToken = useAuthStore((state) => state.setToken);
 
     const [MostrarSenha, setMostrarSenha] = useState(false);
@@ -37,7 +39,7 @@ export default function Cadastro(){
             status: "ativo"
         };
 
-        CreateUser(dadosComStatus, {
+        postUser(dadosComStatus, {
             onSuccess: async () => {
                 try {
                     await loginUser({
@@ -49,8 +51,15 @@ export default function Cadastro(){
                 }
             },
             onError: (err) => {
-                console.error("Erro ao cadastrar:", err.response?.data || err.message || err);
-                alert("Erro ao cadastrar: " + (err.response?.data?.mensagem || err.message));
+        console.error("Erro ao cadastrar:", err.response?.data || err.message || err);
+        const mensagem = err.response?.data?.mensagem || "Erro ao cadastrar. Tente novamente.";
+        
+        // Verifica se é erro de email ou nome já existente
+        if (mensagem.toLowerCase().includes("email") || mensagem.toLowerCase().includes("usuário")) {
+            setErroCadastro(mensagem);
+        } else {
+            alert(mensagem);
+        }
             },
             });
     }
