@@ -1,91 +1,84 @@
 import styled from "styled-components";
+import { Input, Table } from "antd";
 
 export const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60%;
-
-  flex-direction: column;
-  gap: 10px;
+  padding: 2rem;
+  background-color: black;
+  color: white;
+  min-height: 100vh;
 `;
 
-export const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-`;
-
-export const ModalContent = styled.div`
-  background: white;
-  border-radius: 16px;
-  padding: 25px;
-  width: 90%;
-  max-width: 400px;
-  position: relative;
-  box-shadow: 0px 0px 10px #000;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  @media (max-width: 180px) {
-    padding: 15px;
-  }
-`;
-
-export const TituloModal = styled.h2`
-  margin: 0;
-  font-size: 18px;
+export const Title = styled.h1`
   text-align: center;
+  color: yellow;
+  font-size: 2rem;
 `;
 
-export const InputField = styled.input`
-  padding: 10px 15px;
+export const SearchWrapper = styled.div`
+  margin: 1.5rem auto;
+  max-width: 600px;
+  background: white;
+  display: flex;
+  align-items: center;
   border-radius: 999px;
-  border: 1px solid #ccc;
-  outline: none;
-  font-size: 14px;
+  padding: 0.5rem 1rem;
+`;
 
-  &::placeholder {
-    color: #aaa;
+export const StyledInput = styled(Input)`
+  border: none;
+  flex: 1;
+  font-weight: bold;
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
   }
 `;
 
-export const BotaoEditar = styled.button`
-  background-color: #ffd700;
-  color: black;
+export const ActionButton = styled.button`
   border: none;
-  padding: 8px 16px;
-  font-weight: bold;
-  border-radius: 8px;
+  background: transparent;
+  color: white;
+  font-size: 18px;
   cursor: pointer;
-  margin-top: -20px;
+  margin: 0 5px;
+
+  &:hover {
+    color: yellow;
+  }
 `;
 
-export const BotaoSalvar = styled.button`
-  background-color: transparent;
-  border: 2px solid #ffd700;
-  color: #ffd700;
-  font-weight: bold;
-  padding: 10px 20px;
-  border-radius: 12px;
-  margin-top: 10px;
-  cursor: pointer;
-`;
+export const StyledTable = styled(Table)`
+  background-color: black;
 
-export const BotaoCancelar = styled.button`
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  background: none;
-  border: none;
-  font-size: 22px;
-  cursor: pointer;
+  .ant-table {
+    background-color: black;
+    color: white;
+  }
+
+  .ant-table-thead > tr > th {
+    background-color: #1a1a1a;
+    color: white;
+    border-color: #333;
+  }
+
+  .ant-table-tbody > tr > td {
+    background-color: #000;
+    color: white;
+    border-color: #333;
+  }
+
+  .ant-table-tbody > tr:hover > td {
+    background-color: #111;
+  }
+
+  .ant-select-selector {
+    background-color: #222 !important;
+    color: white !important;
+    border-color: #444 !important;
+  }
+
+  .ant-select-arrow {
+    color: white;
+  }
 `;
